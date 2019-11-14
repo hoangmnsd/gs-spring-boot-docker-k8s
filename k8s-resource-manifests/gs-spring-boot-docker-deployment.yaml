@@ -25,5 +25,5 @@ spec:
           imagePullPolicy: Always                         # 7
           name: gs-spring-boot-docker
           ports:
-            - containerPort: 80
+            - containerPort: 5000
 
