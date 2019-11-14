@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment                                          # 1
+metadata:
+  name: gs-spring-boot-docker
+  labels:
+    app: gs-spring-boot-docker
+spec:
+  selector:
+    matchLabels:
+      app: gs-spring-boot-docker
+  replicas: 2                                             # 2
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate                                   # 3
+    rollingUpdate: 
+      maxUnavailable: 1                                   # 4
+      maxSurge: 1                                         # 5
+  template:
+    metadata:
+      labels:
+        app: gs-spring-boot-docker                        # 6
+    spec:
+      containers:
+        - image: hoangmnsd/gs-spring-boot-docker:green2
+          imagePullPolicy: Always                         # 7
+          name: gs-spring-boot-docker
+          ports:
+            - containerPort: 5000
+
